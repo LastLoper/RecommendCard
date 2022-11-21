@@ -7,13 +7,18 @@
 
 import UIKit
 
-class MainVC: UITableViewController {
+class MainVC: UITableViewController {    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //TableView에 Cell 등록
+        self.setUpTableViewCell()
     }
 
-
+    private func setUpTableViewCell() {
+        let nibName = UINib(nibName: "CardListCell", bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: Keys.CellIds.cardListCell)
+    }
 }
 

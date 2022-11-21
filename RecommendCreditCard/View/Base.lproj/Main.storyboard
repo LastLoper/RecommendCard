@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="4RF-VV-QIe">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CardListCell" id="4RF-VV-QIe">
                                 <rect key="frame" x="0.0" y="50" width="390" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4RF-VV-QIe" id="TjG-jf-YJr">
@@ -33,7 +33,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="신용 혜택 추천" id="WpG-bt-ff6"/>
                     <connections>
-                        <segue destination="0fQ-xy-X1a" kind="show" id="m0U-Sh-bcM"/>
+                        <segue destination="0fQ-xy-X1a" kind="show" identifier="ToCardDetailVC" id="m0U-Sh-bcM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xwn-0y-o4l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

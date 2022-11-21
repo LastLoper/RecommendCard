@@ -9,6 +9,11 @@ import UIKit
 
 class CreditCardListCell: UITableViewCell {
 
+    @IBOutlet weak var cardImgView: UIImageView!
+    @IBOutlet weak var lankLabel: UILabel!
+    @IBOutlet weak var cardNameLabel: UILabel!
+    @IBOutlet weak var promotionLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
