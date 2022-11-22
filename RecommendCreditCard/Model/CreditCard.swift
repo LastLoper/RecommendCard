@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct CredigCard: Codable {
+struct CreditCard: Codable {
     let id: Int
-    let lank: Int
+    let rank: Int
     let name: String
-    let cardImgUrl: String
+    let cardImageURL: String
     let promotionDetail: PromotionDetail
     let isSelected: Bool?
 }

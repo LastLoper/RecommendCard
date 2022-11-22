@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CreditCardListCell: UITableViewCell {
 
@@ -25,4 +26,15 @@ class CreditCardListCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func prepare(cardInfo: CreditCard) {
+        let cardName = cardInfo.name
+        let lank = cardInfo.rank
+        let cardImgUrl = URL(string: cardInfo.cardImageURL)
+        let promotion = cardInfo.promotionDetail.amount
+        
+        self.cardNameLabel.text = cardName
+        self.lankLabel.text = "\(lank)위"
+        self.cardImgView.kf.setImage(with: cardImgUrl)
+        self.promotionLabel.text = "\(promotion)만원 증정"
+    }
 }

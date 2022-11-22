@@ -13,8 +13,13 @@ struct Keys {
         static let cardListCell = "CardListCell"
     }
     
+    //Segue Ids
+    struct SegueIds {
+        static let toCardDetailVC = "ToCardDetailVC"
+    }
+    
     //VC Ids
     struct VCIds {
-        static let toCardDetailVC = "ToCardDetailVC"
+        static let detailVC = "DetailVC"
     }
 }
