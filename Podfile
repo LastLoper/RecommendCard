@@ -15,4 +15,6 @@ target 'RecommendCreditCard' do
   
   #Pods for Firebase/Database
   pod 'Firebase/Database'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
 end

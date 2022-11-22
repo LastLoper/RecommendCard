@@ -17,26 +17,50 @@ class MainVC: UITableViewController {
         //TableView에 Cell 등록
         self.setUpTableViewCell()
         
-        //Firebase의 Database에서 카드 정보 가져오기
-        creditCardManager.ref.observe(.value) { snapShot, _  in
-            guard let value = snapShot.value as? [String: [String: Any]] else { return }
+        //Firebase의 RealTime Database에서 카드 정보 가져오기
+//        creditCardManager.ref.observe(.value) { snapShot, _  in
+//            guard let value = snapShot.value as? [String: [String: Any]] else { return }
+//
+//            do {
+//                let jsonData = try JSONSerialization.data(withJSONObject: value)
+//                let cardData = try JSONDecoder().decode([String: CreditCard].self, from: jsonData)
+//                let cardList = Array(cardData.values)
+//
+//                let creditCards = cardList.sorted(by: {
+//                    $0.rank < $1.rank
+//                })
+//                self.creditCardManager.setCreditCardData(creditCard: creditCards)
+//
+//                DispatchQueue.main.async {
+//                    //테이블뷰 리로드
+//                    self.tableView.reloadData()
+//                }
+//            } catch let error {
+//                print("Error : \(error.localizedDescription)")
+//            }
+//        }
+        
+        //Firebase의 Firstore Database에서 카드 정보 가져오기
+        creditCardManager.db.collection("creditCardList").addSnapshotListener { snapShot, error in
+            guard let documents = snapShot?.documents else {
+                print("Error : \(String(describing: error))")
+                return
+            }
             
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: value)
-                let cardData = try JSONDecoder().decode([String: CreditCard].self, from: jsonData)
-                let cardList = Array(cardData.values)
-                
-                let creditCards = cardList.sorted(by: {
-                    $0.rank < $1.rank
-                })
-                self.creditCardManager.setCreditCardData(creditCard: creditCards)
-                
-                DispatchQueue.main.async {
-                    //테이블뷰 리로드
-                    self.tableView.reloadData()
+            let creditCardList = documents.compactMap { doc -> CreditCard? in
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: doc.data(), options: [])
+                    let creditCard = try JSONDecoder().decode(CreditCard.self, from: jsonData)
+                    return creditCard
+                } catch let error {
+                    print("error : \(error.localizedDescription)")
+                    return nil
                 }
-            } catch let error {
-                print("Error : \(error.localizedDescription)")
+            }.sorted { $0.rank < $1.rank }
+            
+            self.creditCardManager.setCreditCardData(creditCard: creditCardList)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         }
     }
@@ -76,11 +100,11 @@ class MainVC: UITableViewController {
         vc.promotionDetail = promotion
         self.show(vc, sender: nil)
 
-        //Obtion1, Database의 Key를 알 때
-//        creditCardManager.setIsSelectedValue(idx: item)
+        //Obtion1, RealTime Database & Firestore의 Key를 알 때 데이터 삽입
+//        creditCardManager.insertIsSelectedValue(idx: item)
         
-        //Obtion2, Database의 Key를 모를 때
-        creditCardManager.setIsSelectedValue2(idx: item)
+        //Obtion2, RealTime Database & Firestore의 Key를 모를 때 데이터 삽입
+        creditCardManager.insertIsSelectedValue2(idx: item)
     }
     
     //스와이프해서 테이블뷰 아이템 삭제
@@ -88,8 +112,15 @@ class MainVC: UITableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let item = indexPath.item
         
-        return .delete
+        if editingStyle == .delete {
+            //Option1, RealTime Database & Firestore의 Key를 알 때 데이터 삭제
+    //        creditCardManager.deleteItemAtFirebase(idx: item)
+
+            //Option2, Database & Firestore의 Key를 모를때 데이터 삭제
+            creditCardManager.deleteItemAtFirebase2(idx: item)
+        }
     }
 }
