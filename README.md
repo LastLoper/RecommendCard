@@ -5,8 +5,8 @@ Database의 신용카드 정보를 받아와 리스트로 보여주고, 상세 �
 
 ## 스크린샷
 <img src="https://user-images.githubusercontent.com/104996680/203260852-89c0279b-9629-4d95-987a-d09b87a7dac3.png" alt="신용카드 추천 앱" width="650">
-<img src="https://user-images.githubusercontent.com/104996680/203260878-34e10d22-7c38-4265-ae56-59e63ae79c03.png" alt="신용카드 추천 앱" width="650">
-<img src="https://user-images.githubusercontent.com/104996680/203260889-54c70991-1f19-4e54-8ff1-846d401e58fa.png" alt="신용카드 추천 앱" width="650">
+<img src="https://user-images.githubusercontent.com/104996680/203260878-34e10d22-7c38-4265-ae56-59e63ae79c03.png" alt="신용카드 추천 앱">
+<img src="https://user-images.githubusercontent.com/104996680/203260889-54c70991-1f19-4e54-8ff1-846d401e58fa.png" alt="신용카드 추천 앱">
 
 ## 주요 기능 및 목표
 - Firebase Realtime Database
